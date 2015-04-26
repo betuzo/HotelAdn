@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Hotel Adn</string>
+    <string name="username">Usuario:</string>
+    <string name="password">Password:</string>
+    <string name="submit">Entran</string>
+    <string name="vacio"></string>
+    <string name="modo_habitacion">Habitación</string>
+    <string name="modo_admin">Administrar</string>
+
+</resources>
