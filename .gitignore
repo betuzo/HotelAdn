@@ -28,4 +28,4 @@ proguard/
 
 # Idea
 .idea*
-.idea/*
+.idea/
