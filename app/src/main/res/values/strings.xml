@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Hotel Adn</string>
+    <string name="username">Usuario:</string>
+    <string name="password">Password:</string>
+    <string name="submit">Entran</string>
+    <string name="vacio"></string>
+    <string name="modo_habitacion">Habitación</string>
+    <string name="modo_admin">Administrar</string>
+    <string name="title_activity_setting">SettingActivity</string>
+
+    <string name="message_username_invalid">Usuario invalido</string>
+    <string name="message_password_invalid">Passwoord invalido</string>
+
+    <string name="pref_title_general">Hotel ADN - Config</string>
+    <string name="pref_title_habitacion">Seleccione Habitación</string>
+    <string-array name="pref_list_habitacion_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+    </string-array>
+    <string-array name="pref_list_habitacion_values">
+        <item>15</item>
+        <item>30</item>
+    </string-array>
+    <string name="title_activity_solicitud">SolicitudActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+</resources>
