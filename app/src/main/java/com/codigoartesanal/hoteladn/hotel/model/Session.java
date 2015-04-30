@@ -12,6 +12,7 @@ public class Session extends RealmObject {
     private String          descripcionHabitacion;
     private long            idHotel;
     private String          nombreOficial;
+    private String          token;
 
     public long getIdHabitacion() {
         return idHabitacion;
@@ -51,5 +52,13 @@ public class Session extends RealmObject {
 
     public void setNombreOficial(String nombreOficial) {
         this.nombreOficial = nombreOficial;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

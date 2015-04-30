@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip" >
 
     <TextView
-        android:id="@+id/tv_label"
+        android:id="@+id/service_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Label"
-        android:textSize="20sp" >
-    </TextView>
+        android:textStyle="bold"
+        android:typeface="sans" />
 
     <TextView
-        android:id="@+id/tv_id"
+        android:id="@+id/solicitud_state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sample Id"
-        android:textSize="20sp" >
-    </TextView>
-</LinearLayout>
+        android:layout_below="@id/service_desc"
+        android:layout_marginTop="5dip"
+        android:textColor="#343434"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/solicitud_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/solicitud_state"
+        android:layout_alignBottom="@+id/solicitud_state"
+        android:layout_alignParentRight="true"
+        android:textColor="#343434"
+        android:textSize="12sp" />
+</RelativeLayout>

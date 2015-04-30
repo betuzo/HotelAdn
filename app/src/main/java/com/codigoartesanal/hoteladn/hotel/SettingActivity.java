@@ -104,6 +104,7 @@ public class SettingActivity extends PreferenceActivity {
         session.setIdHabitacion(hab.getId());
         session.setNumeroHabitacion(hab.getNumeroHabitacion());
         session.setDescripcionHabitacion(hab.getDescripcionHabitacion());
+        session.setToken(this.user.getToken());
 
         realm.commitTransaction();
     }

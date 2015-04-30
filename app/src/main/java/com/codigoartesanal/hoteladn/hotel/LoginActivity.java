@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codigoartesanal.hoteladn.hotel.model.Session;
+import com.codigoartesanal.hoteladn.hotel.model.SessionRepository;
 import com.codigoartesanal.hoteladn.hotel.model.User;
 
 import org.json.JSONArray;
@@ -85,7 +86,7 @@ public class LoginActivity extends AbstractAsyncActivity {
         this.swTipoLogin = (Switch) findViewById(R.id.switch_modo);
         this.swTipoLogin .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Session session = checkData();
+                Session session = SessionRepository.checkData(getApplicationContext());
                 configureByTipo(session, !isChecked);
             }
         });
@@ -101,7 +102,7 @@ public class LoginActivity extends AbstractAsyncActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Session session = this.checkData();
+        Session session = SessionRepository.checkData(this);
         this.configureByTipo(session, (session==null));
     }
 
@@ -149,17 +150,6 @@ public class LoginActivity extends AbstractAsyncActivity {
                             session.getNombreOficial());
 
         }
-    }
-
-    private Session checkData() {
-        Realm realm = Realm.getInstance(this);
-        RealmQuery<Session> query = realm.where(Session.class);
-        RealmResults<Session> result = query.findAll();
-
-        for (Session session : result) {
-            return session;
-        }
-        return null;
     }
 
     private void showSettings(User user){

@@ -45,8 +45,9 @@ public class SolicitudServicioArrayAdapter extends ArrayAdapter<SolicitudServici
         }
 
         SolicitudServicio item = getItem(position);
-        ((TextView)view.findViewById(R.id.tv_label)).setText(item.getServicioDesc());
-        ((TextView)view.findViewById(R.id.tv_id)).setText("" + item.getId());
+        ((TextView)view.findViewById(R.id.service_desc)).setText(item.getServicioDesc());
+        ((TextView)view.findViewById(R.id.solicitud_state)).setText(item.getEstadoSolicitud());
+        ((TextView)view.findViewById(R.id.solicitud_date)).setText(item.getFechaSolicitud().toString());
 
         return view;
     }

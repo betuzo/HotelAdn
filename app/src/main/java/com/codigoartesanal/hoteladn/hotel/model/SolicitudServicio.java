@@ -1,11 +1,12 @@
 package com.codigoartesanal.hoteladn.hotel.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by betuzo on 29/04/15.
  */
-public class SolicitudServicio {
+public class SolicitudServicio implements Serializable {
     private long id;
     private String habitacionNo;
     private String estadoSolicitud;
