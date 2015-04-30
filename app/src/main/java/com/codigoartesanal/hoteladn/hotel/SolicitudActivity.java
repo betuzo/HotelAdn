@@ -50,7 +50,7 @@ public class SolicitudActivity extends ActionBarActivity
     public void onFragmentInteraction(SolicitudServicio solicitudServicio) {
         Log.i(TAG, solicitudServicio.getServicioDesc());
                 getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container,
+                    .add(R.id.detail,
                             SolicitudServicioNuevaFragment.newInstance(solicitudServicio))
                     .commit();
     }
