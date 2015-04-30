@@ -29,3 +29,5 @@ proguard/
 # Idea
 .idea*
 .idea/
+.idea/workspace.xml
+
