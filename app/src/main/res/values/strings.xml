@@ -23,5 +23,5 @@
     </string-array>
     <string name="title_activity_solicitud">SolicitudActivity</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_logout">Salir</string>
 </resources>
