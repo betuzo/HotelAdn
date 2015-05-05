@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.codigoartesanal.hoteladn.hotel.model.Session;
 import com.codigoartesanal.hoteladn.hotel.model.SessionRepository;
 import com.codigoartesanal.hoteladn.hotel.model.User;
+import com.codigoartesanal.hoteladn.hotel.service.LoginService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -86,7 +87,7 @@ public class LoginActivity extends AbstractAsyncActivity {
         this.swTipoLogin = (Switch) findViewById(R.id.switch_modo);
         this.swTipoLogin .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Session session = SessionRepository.checkData(getApplicationContext());
+                Session session = SessionRepository.get(getApplicationContext());
                 configureByTipo(session, !isChecked);
             }
         });
@@ -102,8 +103,8 @@ public class LoginActivity extends AbstractAsyncActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Session session = SessionRepository.checkData(this);
-        this.configureByTipo(session, (session==null));
+        Session session = SessionRepository.get(this);
+        this.configureByTipo(session, (session==null || session.getToken().isEmpty()));
     }
 
     // ***************************************
@@ -134,7 +135,7 @@ public class LoginActivity extends AbstractAsyncActivity {
     private void configureByTipo(Session session, boolean isLogin) {
         if (isLogin) {
             this.swTipoLogin.setChecked(false);
-            this.swTipoLogin.setEnabled((session != null));
+            this.swTipoLogin.setEnabled((session != null && !session.getToken().isEmpty()));
             this.tipoLogin = TipoLogin.LOGIN;
             this.lyInfoHabitacion.setVisibility(LinearLayout.GONE);
             this.lyLogin.setVisibility(LinearLayout.VISIBLE);
@@ -229,30 +230,7 @@ public class LoginActivity extends AbstractAsyncActivity {
         @Override
         protected void onPostExecute(String result) {
             dismissProgressDialog();
-            showSettings(this.convertStringToJSONObject(result));
-        }
-
-        private User convertStringToJSONObject(String result) {
-            try {
-                JSONObject jsonObject = new JSONObject(result);
-                User user = new User();
-                user.setId(jsonObject.getLong("id"));
-                user.setName((String) jsonObject.get("name"));
-                user.setUsername((String) jsonObject.get("username"));
-                user.setToken((String) jsonObject.get("token"));
-                user.setIdHotel(jsonObject.getLong("idHotel"));
-                user.setHotel(jsonObject.getString("hotel"));
-                JSONArray jsonArray = (JSONArray) jsonObject.get("roles");
-                List<String> list = new ArrayList<String>();
-                for (int i=0; i<jsonArray.length(); i++) {
-                    list.add( jsonArray.getString(i) );
-                }
-                user.setRoles(list);
-                return user;
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return null;
+            showSettings(LoginService.convertStringToJSONObject(result));
         }
 
     }

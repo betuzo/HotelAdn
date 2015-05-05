@@ -1,6 +1,5 @@
 package com.codigoartesanal.hoteladn.hotel;
 
-import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,7 +20,13 @@ public class SolicitudActivity extends ActionBarActivity
         setContentView(R.layout.activity_solicitud);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, SolicitudServicioFragment.newInstance("", ""))
+                    .add(R.id.container, SolicitudServicioFragment.newInstance())
+                    .commit();
+            SolicitudServicio solicitudServicio = new SolicitudServicio();
+            solicitudServicio.setId(-1L);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.detail,
+                            SolicitudServicioDetailFragment.newInstance(solicitudServicio))
                     .commit();
         }
     }
@@ -50,8 +55,8 @@ public class SolicitudActivity extends ActionBarActivity
     public void onFragmentInteraction(SolicitudServicio solicitudServicio) {
         Log.i(TAG, solicitudServicio.getServicioDesc());
                 getSupportFragmentManager().beginTransaction()
-                    .add(R.id.detail,
-                            SolicitudServicioNuevaFragment.newInstance(solicitudServicio))
+                    .replace(R.id.detail,
+                            SolicitudServicioDetailFragment.newInstance(solicitudServicio))
                     .commit();
     }
 }

@@ -14,6 +14,7 @@ import android.util.Log;
 
 import com.codigoartesanal.hoteladn.hotel.model.Habitacion;
 import com.codigoartesanal.hoteladn.hotel.model.Session;
+import com.codigoartesanal.hoteladn.hotel.model.SessionRepository;
 import com.codigoartesanal.hoteladn.hotel.model.User;
 
 import org.springframework.http.HttpEntity;
@@ -94,11 +95,8 @@ public class SettingActivity extends PreferenceActivity {
 
     private void saveSession(int location) {
         Habitacion hab = this.habitaciones.get(location);
-        Realm realm = Realm.getInstance(this);
 
-        realm.beginTransaction();
-
-        Session session = realm.createObject(Session.class);
+        Session session = new Session();
         session.setIdHotel(this.user.getIdHotel());
         session.setNombreOficial(this.user.getHotel());
         session.setIdHabitacion(hab.getId());
@@ -106,7 +104,7 @@ public class SettingActivity extends PreferenceActivity {
         session.setDescripcionHabitacion(hab.getDescripcionHabitacion());
         session.setToken(this.user.getToken());
 
-        realm.commitTransaction();
+        SessionRepository.validate(session, this);
     }
 
     private static boolean isXLargeTablet(Context context) {

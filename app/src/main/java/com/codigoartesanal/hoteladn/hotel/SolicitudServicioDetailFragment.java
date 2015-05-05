@@ -3,26 +3,30 @@ package com.codigoartesanal.hoteladn.hotel;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 
+import com.codigoartesanal.hoteladn.hotel.dialog.AlertDialogChangeStateFragment;
 import com.codigoartesanal.hoteladn.hotel.listener.OnFragmentInteractionSolicitudListener;
 import com.codigoartesanal.hoteladn.hotel.model.SolicitudServicio;
-import com.google.android.gms.plus.PlusOneButton;
 
 /**
  * A fragment with a Google +1 button.
  * Activities that contain this fragment must implement the
  * {@link OnFragmentInteractionSolicitudListener} interface
  * to handle interaction events.
- * Use the {@link SolicitudServicioNuevaFragment#newInstance} factory method to
+ * Use the {@link SolicitudServicioDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SolicitudServicioNuevaFragment extends Fragment {
+public class SolicitudServicioDetailFragment extends Fragment {
     private static final String ARG_SOLICITUD_SERVICIO = "solicitudServicio";
+    private static final String TAG_CHANGE_STATE_DIALOG_FRAGMENT = "tagChangeStateDialogFragment";
 
     private SolicitudServicio solicitudServicio;
 
@@ -35,15 +39,15 @@ public class SolicitudServicioNuevaFragment extends Fragment {
      * @param solicitud Parameter 1.
      * @return A new instance of fragment SolicitudServicioNuevaFragment.
      */
-    public static SolicitudServicioNuevaFragment newInstance(SolicitudServicio solicitud) {
-        SolicitudServicioNuevaFragment fragment = new SolicitudServicioNuevaFragment();
+    public static SolicitudServicioDetailFragment newInstance(SolicitudServicio solicitud) {
+        SolicitudServicioDetailFragment fragment = new SolicitudServicioDetailFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_SOLICITUD_SERVICIO, solicitud);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public SolicitudServicioNuevaFragment() {
+    public SolicitudServicioDetailFragment() {
         // Required empty public constructor
     }
 
@@ -60,6 +64,31 @@ public class SolicitudServicioNuevaFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_solicitud_servicio_nueva, container, false);
+        if(solicitudServicio.getId()<0) {
+            return view;
+        }
+
+        TextView txtHabitacion = (TextView) view.findViewById(R.id.txt_habitacion);
+        txtHabitacion.setText(solicitudServicio.getHabitacionNo() + " "
+                + solicitudServicio.getHabitacionDesc());
+        TextView txtServicio = (TextView) view.findViewById(R.id.txt_servicio);
+        txtServicio.setText(solicitudServicio.getServicioDesc());
+        TextView txtFecha = (TextView) view.findViewById(R.id.txt_fecha);
+        txtFecha.setText(solicitudServicio.getFechaSolicitud().toString());
+        TextView txtEstado = (TextView) view.findViewById(R.id.txt_estado);
+        txtEstado.setText(solicitudServicio.getEstadoSolicitud());
+
+        final Button submitButton = (Button) view.findViewById(R.id.btn_change_state);
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                DialogFragment fragment = new AlertDialogChangeStateFragment();
+                Bundle args = new Bundle();
+                args.putSerializable(AlertDialogChangeStateFragment.ARG_SOLICITUD,
+                        solicitudServicio);
+                fragment.setArguments(args);
+                fragment.show(getFragmentManager(), TAG_CHANGE_STATE_DIALOG_FRAGMENT);
+            }
+        });
 
         return view;
     }

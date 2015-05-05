@@ -19,6 +19,7 @@ import com.codigoartesanal.hoteladn.hotel.listener.OnFragmentInteractionSolicitu
 import com.codigoartesanal.hoteladn.hotel.model.Session;
 import com.codigoartesanal.hoteladn.hotel.model.SessionRepository;
 import com.codigoartesanal.hoteladn.hotel.model.SolicitudServicio;
+import com.codigoartesanal.hoteladn.hotel.service.LoginService;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +27,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -61,7 +63,7 @@ public class SolicitudServicioFragment extends Fragment implements AbsListView.O
      */
     private SolicitudServicioArrayAdapter mAdapter;
 
-    public static SolicitudServicioFragment newInstance(String param1, String param2) {
+    public static SolicitudServicioFragment newInstance() {
         SolicitudServicioFragment fragment = new SolicitudServicioFragment();
 
         return fragment;
@@ -78,7 +80,7 @@ public class SolicitudServicioFragment extends Fragment implements AbsListView.O
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        session = SessionRepository.checkData(getActivity());
+        session = SessionRepository.get(getActivity());
         mAdapter = new SolicitudServicioArrayAdapter(getActivity());
         new DownloadSolicitudServicioTask().execute();
     }
@@ -172,8 +174,9 @@ public class SolicitudServicioFragment extends Fragment implements AbsListView.O
 
                 // convert the array to a list and return it
                 return Arrays.asList(responseEntity.getBody());
-            } catch (Exception e) {
+            } catch (HttpClientErrorException e) {
                 Log.e(TAG, e.getLocalizedMessage(), e);
+                LoginService.handlerError(e, getActivity());
             }
 
             return null;

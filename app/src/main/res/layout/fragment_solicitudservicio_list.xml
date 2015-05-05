@@ -6,13 +6,29 @@
     android:id="@+id/list_solicitud"
     tools:context="com.codigoartesanal.hoteladn.hotel.SolicitudServicioFragment">
 
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:listSelector="@drawable/selector_list_solicitud"
-        android:layout_height="match_parent" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <TextView android:id="@android:id/empty" android:layout_width="match_parent"
-        android:layout_height="match_parent" android:gravity="center" />
+        <TextView
+            android:id="@android:id/empty"
+            android:layout_margin="5dip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/sol_list"/>
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_margin="5dip"
+            android:layout_width="match_parent"
+            android:listSelector="@drawable/selector_list_solicitud"
+            android:layout_height="match_parent"
+            android:divider="@color/list_row_selected_bg"
+            android:dividerHeight="2dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
 </FrameLayout>

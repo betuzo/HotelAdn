@@ -13,15 +13,25 @@
 
     <string name="pref_title_general">Hotel ADN - Config</string>
     <string name="pref_title_habitacion">Seleccione Habitación</string>
-    <string-array name="pref_list_habitacion_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-    </string-array>
-    <string-array name="pref_list_habitacion_values">
-        <item>15</item>
-        <item>30</item>
-    </string-array>
+
     <string name="title_activity_solicitud">SolicitudActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_logout">Salir</string>
+
+    <string name="sol_list">Solicitudes</string>
+    <string name="sol_detail">Detalle Solicitud</string>
+    <string name="sol_habitacion">Habitación</string>
+    <string name="sol_servicio">Servicio</string>
+    <string name="sol_fecha">Fecha</string>
+    <string name="sol_estado">Estado</string>
+    <string name="sol_chage_state">Cambiar Estado</string>
+    <string name="sol_view_comments">Comentarios</string>
+
+    <string-array name="sol_list_state_values">
+        <item>SOLICITADA</item>
+        <item>ENPROCESO</item>
+        <item>PENDIENTE</item>
+        <item>ATENDIDA</item>
+        <item>CANCELADA</item>
+    </string-array>
 </resources>
