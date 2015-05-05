@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.codigoartesanal.hoteladn.hotel.adapter.SolicitudServicioArrayAdapter;
 import com.codigoartesanal.hoteladn.hotel.listener.OnFragmentInteractionSolicitudListener;
+import com.codigoartesanal.hoteladn.hotel.listener.OnStateSelectedListener;
 import com.codigoartesanal.hoteladn.hotel.model.Session;
 import com.codigoartesanal.hoteladn.hotel.model.SessionRepository;
 import com.codigoartesanal.hoteladn.hotel.model.SolicitudServicio;
@@ -43,7 +44,8 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionSolicitudListener}
  * interface.
  */
-public class SolicitudServicioFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class SolicitudServicioFragment extends Fragment
+        implements AbsListView.OnItemClickListener, OnStateSelectedListener {
 
     protected static final String TAG = SolicitudServicioFragment.class.getSimpleName();
 
@@ -56,6 +58,8 @@ public class SolicitudServicioFragment extends Fragment implements AbsListView.O
      * The fragment's ListView/GridView.
      */
     private AbsListView mListView;
+
+    private View viewRowSelected;
 
     /**
      * The Adapter which will be used to populate the ListView/GridView with
@@ -123,6 +127,7 @@ public class SolicitudServicioFragment extends Fragment implements AbsListView.O
         if (null != mListener) {
             mListener.onFragmentInteraction(solicitudes.get(position));
         }
+        viewRowSelected = view;
     }
 
     /**
@@ -136,6 +141,12 @@ public class SolicitudServicioFragment extends Fragment implements AbsListView.O
         if (emptyView instanceof TextView) {
             ((TextView) emptyView).setText(emptyText);
         }
+    }
+
+    @Override
+    public void onArticleSelected(SolicitudServicio solicitudServicio) {
+        ((TextView)viewRowSelected.findViewById(R.id.solicitud_state)).setText(
+                solicitudServicio.getEstadoSolicitud());
     }
 
     // ***************************************

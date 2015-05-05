@@ -1,11 +1,13 @@
 package com.codigoartesanal.hoteladn.hotel.model;
 
+import java.io.Serializable;
+
 import io.realm.RealmObject;
 
 /**
  * Created by betuzo on 25/04/15.
  */
-public class Session extends RealmObject {
+public class Session extends RealmObject implements Serializable {
 
     private long            idHabitacion;
     private String          numeroHabitacion;

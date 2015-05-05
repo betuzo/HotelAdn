@@ -5,14 +5,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.codigoartesanal.hoteladn.hotel.listener.OnStateSelectedListener;
 import com.codigoartesanal.hoteladn.hotel.listener.OnFragmentInteractionSolicitudListener;
 import com.codigoartesanal.hoteladn.hotel.model.SolicitudServicio;
 
 public class SolicitudActivity extends ActionBarActivity
-        implements OnFragmentInteractionSolicitudListener {
+        implements OnFragmentInteractionSolicitudListener, OnStateSelectedListener {
 
     protected static final String TAG = SolicitudActivity.class.getSimpleName();
+
+    public static final String TAG_SOL_LIST_FRAGMENT = "tagSolListFragment";
+    public static final String TAG_SOL_DETAIL_FRAGMENT = "tagSolDetailFragment";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +26,16 @@ public class SolicitudActivity extends ActionBarActivity
         setContentView(R.layout.activity_solicitud);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, SolicitudServicioFragment.newInstance())
+                    .add(R.id.container,
+                            SolicitudServicioFragment.newInstance(),
+                            TAG_SOL_LIST_FRAGMENT)
                     .commit();
             SolicitudServicio solicitudServicio = new SolicitudServicio();
             solicitudServicio.setId(-1L);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.detail,
-                            SolicitudServicioDetailFragment.newInstance(solicitudServicio))
+                            SolicitudServicioDetailFragment.newInstance(solicitudServicio),
+                            TAG_SOL_DETAIL_FRAGMENT)
                     .commit();
         }
     }
@@ -56,7 +65,19 @@ public class SolicitudActivity extends ActionBarActivity
         Log.i(TAG, solicitudServicio.getServicioDesc());
                 getSupportFragmentManager().beginTransaction()
                     .replace(R.id.detail,
-                            SolicitudServicioDetailFragment.newInstance(solicitudServicio))
+                            SolicitudServicioDetailFragment.newInstance(solicitudServicio),
+                            TAG_SOL_DETAIL_FRAGMENT)
                     .commit();
+    }
+
+    @Override
+    public void onArticleSelected(SolicitudServicio solicitudServicio) {
+        Toast.makeText(this, solicitudServicio.getEstadoSolicitud(), Toast.LENGTH_LONG).show();
+        OnStateSelectedListener listener = (OnStateSelectedListener)
+                getSupportFragmentManager().findFragmentByTag(SolicitudActivity.TAG_SOL_DETAIL_FRAGMENT);
+        listener.onArticleSelected(solicitudServicio);
+        listener = (OnStateSelectedListener)
+                getSupportFragmentManager().findFragmentByTag(SolicitudActivity.TAG_SOL_LIST_FRAGMENT);
+        listener.onArticleSelected(solicitudServicio);
     }
 }

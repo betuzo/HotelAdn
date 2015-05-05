@@ -24,7 +24,8 @@ public class SessionRepository {
     public static void validate(Session ses, Context context) {
         Session session = get(context);
         if (session != null) {
-            update(ses, context);
+            session.setToken(ses.getToken());
+            update(session, context);
         } else {
             save(ses, context);
         }
