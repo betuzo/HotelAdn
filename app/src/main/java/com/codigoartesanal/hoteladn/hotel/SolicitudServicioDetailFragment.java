@@ -1,6 +1,7 @@
 package com.codigoartesanal.hoteladn.hotel;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -105,6 +106,14 @@ public class SolicitudServicioDetailFragment extends Fragment
                         session);
                 fragment.setArguments(args);
                 fragment.show(getFragmentManager(), TAG_CHANGE_STATE_DIALOG_FRAGMENT);
+            }
+        });
+
+        btnViewComments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent launch = new Intent(getActivity(), CommentActivity.class);
+                getActivity().startActivity(launch);
             }
         });
 
