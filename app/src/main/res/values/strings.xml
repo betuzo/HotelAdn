@@ -21,11 +21,15 @@
     <string name="sol_list">Solicitudes</string>
     <string name="sol_detail">Detalle Solicitud</string>
     <string name="sol_habitacion">Habitación</string>
+    <string name="sol_categoria">Categoria</string>
     <string name="sol_servicio">Servicio</string>
+    <string name="sol_comentario">Comentario</string>
     <string name="sol_fecha">Fecha</string>
     <string name="sol_estado">Estado</string>
-    <string name="sol_chage_state">Cambiar Estado</string>
-    <string name="sol_view_comments">Comentarios</string>
+    <string name="sol_chage_state">-</string>
+    <string name="sol_view_comments">[~]</string>
+    <string name="sol_new">+</string>
+    <string name="sol_new_save">Registrar Solicitud</string>
 
     <string-array name="sol_list_state_values">
         <item>SOLICITADA</item>
@@ -36,4 +40,10 @@
     </string-array>
     <string name="title_activity_comment">CommentActivity</string>
     <string name="action_settings">Settings</string>
+
+    <string name="com_empleado">Empleado</string>
+    <string name="com_title">Comentarios</string>
+    <string name="com_comentar">Comentar</string>
+    <string name="com_escribir_comentario">Escribir comentario</string>
+    <string name="title_activity_solicitud_new">SolicitudNewActivity</string>
 </resources>

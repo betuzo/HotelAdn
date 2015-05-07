@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.codigoartesanal.hoteladn.hotel.R;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,15 +22,18 @@ import java.util.Map;
  */
 public class CommentAdapter extends BaseAdapter {
 
-    public static final String PROPERTY_ID                  = "id";
-    public static final String PROPERTY_SOLICITUD_ID        = "solicitudId";
-    public static final String PROPERTY_TIPO_COMENTARIO     = "tipoComentario";
-    public static final String PROPERTY_EMPLEADO_ID         = "empleadoId";
-    public static final String PROPERTY_EMPLEADO_NOMBRE     = "empleadoNombre";
-    public static final String PROPERTY_FECHA_COMENTARIO    = "fechaComentario";
-    public static final String PROPERTY_COMENTARIO          = "comentario";
+    public static final String PROPERTY_ID                          = "id";
+    public static final String PROPERTY_SOLICITUD_ID                = "solicitudId";
+    public static final String PROPERTY_TIPO_COMENTARIO             = "tipoComentario";
+    public static final String PROPERTY_EMPLEADO_ID                 = "empleadoId";
+    public static final String PROPERTY_EMPLEADO_NOMBRE             = "empleadoNombre";
+    public static final String PROPERTY_FECHA_COMENTARIO            = "fechaComentario";
+    public static final String PROPERTY_COMENTARIO                  = "comentario";
 
-    private final List<Map<String, Object>> chatMessages;
+    public static final String PROPERTY_TIPO_COMENTARIO_HABITACION  = "fechaComentario";
+    public static final String PROPERTY_TIPO_COMENTARIO_EMPLEADO    = "comentario";
+
+    private List<Map<String, Object>> chatMessages;
     private Activity context;
 
     public CommentAdapter(Activity context, List<Map<String, Object>> chatMessages) {
@@ -76,11 +80,15 @@ public class CommentAdapter extends BaseAdapter {
 
         boolean myMsg = chatMessage.get(PROPERTY_TIPO_COMENTARIO).equals("HABITACION") ;//Just a dummy check to simulate whether it me or other sender
         setAlignment(holder, myMsg);
-        holder.txtMessage.setText((String)chatMessage.get(PROPERTY_COMENTARIO));
-        holder.txtInfo.setText((String)chatMessage.get(PROPERTY_FECHA_COMENTARIO));
-
+        holder.txtMessage.setText((String) chatMessage.get(PROPERTY_COMENTARIO));
+        Date fechaComentario = new Date((Long)chatMessage.get(PROPERTY_FECHA_COMENTARIO));
+        holder.txtInfo.setText(fechaComentario.toString());
 
         return convertView;
+    }
+
+    public void setChatMessages(List<Map<String, Object>> chatMessages) {
+        this.chatMessages = chatMessages;
     }
 
     public void add(Map<String, Object> message) {
@@ -139,7 +147,6 @@ public class CommentAdapter extends BaseAdapter {
         holder.txtInfo = (TextView) v.findViewById(R.id.txtInfo);
         return holder;
     }
-
 
     private static class ViewHolder {
         public TextView txtMessage;

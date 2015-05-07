@@ -113,6 +113,9 @@ public class SolicitudServicioDetailFragment extends Fragment
             @Override
             public void onClick(View v) {
                 Intent launch = new Intent(getActivity(), CommentActivity.class);
+                if (solicitudServicio != null) {
+                    launch.putExtra("solicitudServicio", solicitudServicio);
+                }
                 getActivity().startActivity(launch);
             }
         });

@@ -17,7 +17,7 @@
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/chatSendButton"
             android:autoText="true"
-            android:hint="type message" />
+            android:hint="@string/com_escribir_comentario" />
 
         <Button
             android:id="@+id/chatSendButton"
@@ -26,7 +26,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:background="@color/background_floating_material_dark"
-            android:text="Send MSG"
+            android:text="@string/com_comentar"
             android:textColor="@color/background_material_light"/>
 
         <ListView
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_vertical"
-            android:text="MySelf"
+            android:text="@string/vacio"
             android:singleLine="false"
             android:textSize="20dp" />
 
@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="Friend"
+            android:text="@string/com_empleado"
             android:textSize="20dp" />
 
     </RelativeLayout>

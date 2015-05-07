@@ -1,15 +1,18 @@
 package com.codigoartesanal.hoteladn.hotel;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -100,6 +103,14 @@ public class SolicitudServicioFragment extends Fragment
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
+        Button sendBtn = (Button) view.findViewById(R.id.btn_new_sol);
+        sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent launch = new Intent(getActivity(), SolicitudNewActivity.class);
+                getActivity().startActivity(launch);
+            }
+        });
 
         return view;
     }
