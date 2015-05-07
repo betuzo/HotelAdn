@@ -33,6 +33,14 @@
             android:name=".SolicitudActivity"
             android:label="@string/title_activity_solicitud" >
         </activity>
+        <activity
+            android:name=".CommentActivity"
+            android:label="@string/title_activity_comment" >
+        </activity>
+        <activity
+            android:name=".SolicitudNewActivity"
+            android:label="@string/title_activity_solicitud_new" >
+        </activity>
     </application>
 
 </manifest>

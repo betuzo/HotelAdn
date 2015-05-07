@@ -7,13 +7,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@android:id/empty"
-            android:layout_margin="5dip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/sol_detail"/>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@android:id/empty"
+                android:layout_margin="5dip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/sol_detail"/>
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_margin="3dip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sol_view_comments"
+                android:id="@+id/btn_view_comments" />
+        </LinearLayout>
 
         <TextView
             android:layout_margin="6dip"
@@ -36,27 +49,10 @@
             android:text="@string/sol_fecha"
             android:id="@+id/txt_fecha" />
 
-        <TextView
-            android:layout_margin="6dip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sol_estado"
-            android:id="@+id/txt_estado" />
-
         <LinearLayout
-            android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_margin="3dip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sol_view_comments"
-                android:id="@+id/btn_view_comments" />
-
             <Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_margin="3dip"
@@ -65,6 +61,12 @@
                 android:text="@string/sol_chage_state"
                 android:id="@+id/btn_change_state" />
 
+            <TextView
+                android:layout_margin="6dip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sol_estado"
+                android:id="@+id/txt_estado" />
         </LinearLayout>
 
     </LinearLayout>

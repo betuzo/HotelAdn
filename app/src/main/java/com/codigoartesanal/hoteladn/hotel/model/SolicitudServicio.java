@@ -17,6 +17,33 @@ public class SolicitudServicio implements Serializable {
     private long habitacionId;
     private Date fechaSolicitud;
     private long hotelId;
+    private String tipoComentario;
+    private String comentario;
+    private Date fechaComentario;
+
+    public String getTipoComentario() {
+        return tipoComentario;
+    }
+
+    public void setTipoComentario(String tipoComentario) {
+        this.tipoComentario = tipoComentario;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public Date getFechaComentario() {
+        return fechaComentario;
+    }
+
+    public void setFechaComentario(Date fechaComentario) {
+        this.fechaComentario = fechaComentario;
+    }
 
     public long getId() {
         return id;
