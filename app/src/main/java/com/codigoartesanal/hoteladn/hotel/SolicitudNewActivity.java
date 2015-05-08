@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.codigoartesanal.hoteladn.hotel.model.Categoria;
 import com.codigoartesanal.hoteladn.hotel.model.Response;
@@ -101,6 +102,10 @@ public class SolicitudNewActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void displayResponse(Response response) {
+        Toast.makeText(this, response.getMessage(), Toast.LENGTH_LONG).show();
     }
 
     private class DownloadCategoriaTask extends AsyncTask<Void, Void, List<Categoria>> {
@@ -219,23 +224,34 @@ public class SolicitudNewActivity extends ActionBarActivity {
 
     private class SaveSolicitudTask extends AsyncTask<Void, Void, Response> {
         SolicitudServicio solicitudServicio;
+        boolean isValid = true;
 
         @Override
         protected void onPreExecute() {
-            solicitudServicio = new SolicitudServicio();
-            solicitudServicio.setHabitacionId(session.getIdHabitacion());
+            long idHabitacion = session.getIdHabitacion();
             Servicio servicio = (Servicio) spnServicio.getSelectedItem();
+            String comentario = txtComentario.getText().toString();
+            if (servicio == null || comentario == null
+                    || idHabitacion <= 0 || comentario.isEmpty()) {
+                isValid = false;
+                return;
+            }
+            solicitudServicio = new SolicitudServicio();
+            solicitudServicio.setHabitacionId(idHabitacion);
             solicitudServicio.setServicioId(servicio.getId());
             solicitudServicio.setEstadoSolicitud("SOLICITADA");
             solicitudServicio.setFechaSolicitud(new Date());
-            solicitudServicio.setComentario(txtComentario.getText().toString());
+            solicitudServicio.setComentario(comentario);
             solicitudServicio.setTipoComentario("HABITACION");
             solicitudServicio.setFechaComentario(new Date());
-
         }
 
         @Override
         protected Response doInBackground(Void... params) {
+            if (!isValid) {
+                return new Response(Response.CODE_ERROR, "Datos incompletos");
+            }
+
             final String url = getString(R.string.base_uri) + "/solicitud";
             // Set the Accept header for "application/json"
             HttpHeaders requestHeaders = new HttpHeaders();
@@ -265,7 +281,7 @@ public class SolicitudNewActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(Response result) {
-
+            displayResponse(result);
         }
     }
 }
