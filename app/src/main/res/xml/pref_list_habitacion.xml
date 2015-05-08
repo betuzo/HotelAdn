@@ -1,5 +1,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <EditTextPreference
+        android:key="txt_Key"
+        android:title="@string/pref_title_secret_key" />
+
     <ListPreference
         android:key="list_habitacion"
         android:title="@string/pref_title_habitacion"

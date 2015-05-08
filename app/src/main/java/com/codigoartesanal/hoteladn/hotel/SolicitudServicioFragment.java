@@ -190,7 +190,7 @@ public class SolicitudServicioFragment extends Fragment
                 List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
                 acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
                 requestHeaders.setAccept(acceptableMediaTypes);
-                requestHeaders.add("X-Auth-Token", session.getToken());
+                requestHeaders.add("X-Auth-Token", session.getKeyHabitacion());
 
                 // Populate the headers in an HttpEntity object to use for the request
                 HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);

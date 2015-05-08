@@ -15,6 +15,7 @@ public class Session extends RealmObject implements Serializable {
     private long            idHotel;
     private String          nombreOficial;
     private String          token;
+    private String          keyHabitacion;
 
     public long getIdHabitacion() {
         return idHabitacion;
@@ -62,5 +63,13 @@ public class Session extends RealmObject implements Serializable {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getKeyHabitacion() {
+        return keyHabitacion;
+    }
+
+    public void setKeyHabitacion(String keyHabitacion) {
+        this.keyHabitacion = keyHabitacion;
     }
 }

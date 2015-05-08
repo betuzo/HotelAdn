@@ -25,6 +25,7 @@ public class SessionRepository {
         Session session = get(context);
         if (session != null) {
             session.setToken(ses.getToken());
+            session.setKeyHabitacion(ses.getKeyHabitacion());
             update(session, context);
         } else {
             save(ses, context);

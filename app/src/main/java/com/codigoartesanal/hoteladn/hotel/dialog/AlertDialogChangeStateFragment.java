@@ -106,7 +106,7 @@ public class AlertDialogChangeStateFragment extends DialogFragment {
             List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
             acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
             requestHeaders.setAccept(acceptableMediaTypes);
-            requestHeaders.add("X-Auth-Token", session.getToken());
+            requestHeaders.add("X-Auth-Token", session.getKeyHabitacion());
 
             // Populate the headers in an HttpEntity object to use for the request
             HttpEntity<SolicitudServicio> requestEntity =

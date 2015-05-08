@@ -1,10 +1,8 @@
 package com.codigoartesanal.hoteladn.hotel;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -125,7 +123,7 @@ public class SolicitudNewActivity extends ActionBarActivity {
                 List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
                 acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
                 requestHeaders.setAccept(acceptableMediaTypes);
-                requestHeaders.add("X-Auth-Token", session.getToken());
+                requestHeaders.add("X-Auth-Token", session.getKeyHabitacion());
 
                 // Populate the headers in an HttpEntity object to use for the request
                 HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
@@ -176,7 +174,7 @@ public class SolicitudNewActivity extends ActionBarActivity {
                 List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
                 acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
                 requestHeaders.setAccept(acceptableMediaTypes);
-                requestHeaders.add("X-Auth-Token", session.getToken());
+                requestHeaders.add("X-Auth-Token", session.getKeyHabitacion());
 
                 // Populate the headers in an HttpEntity object to use for the request
                 HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
@@ -255,10 +253,10 @@ public class SolicitudNewActivity extends ActionBarActivity {
             final String url = getString(R.string.base_uri) + "/solicitud";
             // Set the Accept header for "application/json"
             HttpHeaders requestHeaders = new HttpHeaders();
-            List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
+            List<MediaType> acceptableMediaTypes = new ArrayList<>();
             acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
             requestHeaders.setAccept(acceptableMediaTypes);
-            requestHeaders.add("X-Auth-Token", session.getToken());
+            requestHeaders.add("X-Auth-Token", session.getKeyHabitacion());
 
             // Populate the headers in an HttpEntity object to use for the request
             HttpEntity<SolicitudServicio> requestEntity =

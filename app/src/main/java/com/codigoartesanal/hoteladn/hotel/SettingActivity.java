@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
@@ -39,6 +40,8 @@ public class SettingActivity extends PreferenceActivity {
     protected static final String TAG = SettingActivity.class.getSimpleName();
     protected User user = null;
     protected List<Habitacion> habitaciones;
+    private String keyHabitacion = "";
+    private EditTextPreference keyPreference;
 
     @Override
     public void onStart() {
@@ -74,6 +77,9 @@ public class SettingActivity extends PreferenceActivity {
         fakeHeader.setTitle(R.string.pref_title_general);
         getPreferenceScreen().addPreference(fakeHeader);
         addPreferencesFromResource(R.xml.pref_list_habitacion);
+        Preference preferenceKey = findPreference("txt_Key");
+        keyPreference = (EditTextPreference) preferenceKey;
+        keyPreference.setText(keyHabitacion);
         Preference preference = findPreference("list_habitacion");
         bindValuesToListPreference((ListPreference) preference, result);
         bindPreferenceSummaryToValue(preference);
@@ -94,6 +100,7 @@ public class SettingActivity extends PreferenceActivity {
     }
 
     private void saveSession(int location) {
+        keyHabitacion = keyPreference.getText();
         Habitacion hab = this.habitaciones.get(location);
 
         Session session = new Session();
@@ -103,6 +110,7 @@ public class SettingActivity extends PreferenceActivity {
         session.setNumeroHabitacion(hab.getNumeroHabitacion());
         session.setDescripcionHabitacion(hab.getDescripcionHabitacion());
         session.setToken(this.user.getToken());
+        session.setKeyHabitacion(keyHabitacion);
 
         SessionRepository.validate(session, this);
     }
