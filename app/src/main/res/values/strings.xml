@@ -13,6 +13,7 @@
 
     <string name="pref_title_general">Hotel ADN - Config</string>
     <string name="pref_title_habitacion">Seleccione Habitación</string>
+    <string name="pref_title_secret_key">Llave Secreta</string>
 
     <string name="title_activity_solicitud">SolicitudActivity</string>
     <string name="hello_world">Hello world!</string>

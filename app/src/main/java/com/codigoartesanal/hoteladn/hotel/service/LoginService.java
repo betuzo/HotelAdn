@@ -61,6 +61,7 @@ public class LoginService {
     private static void error401(Context context){
         Session session = new Session();
         session.setToken("");
+        session.setKeyHabitacion("");
         SessionRepository.validate(session, context);
 
         Intent launch = new Intent(context, LoginActivity.class);

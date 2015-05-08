@@ -37,6 +37,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A fragment representing a list of Items.
@@ -89,6 +90,15 @@ public class SolicitudServicioFragment extends Fragment
 
         session = SessionRepository.get(getActivity());
         mAdapter = new SolicitudServicioArrayAdapter(getActivity());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        resetMessages();
+    }
+
+    public void resetMessages() {
         new DownloadSolicitudServicioTask().execute();
     }
 
@@ -180,7 +190,7 @@ public class SolicitudServicioFragment extends Fragment
                 List<MediaType> acceptableMediaTypes = new ArrayList<MediaType>();
                 acceptableMediaTypes.add(MediaType.APPLICATION_JSON);
                 requestHeaders.setAccept(acceptableMediaTypes);
-                requestHeaders.add("X-Auth-Token", session.getToken());
+                requestHeaders.add("X-Auth-Token", session.getKeyHabitacion());
 
                 // Populate the headers in an HttpEntity object to use for the request
                 HttpEntity<?> requestEntity = new HttpEntity<Object>(requestHeaders);
@@ -199,6 +209,8 @@ public class SolicitudServicioFragment extends Fragment
             } catch (HttpClientErrorException e) {
                 Log.e(TAG, e.getLocalizedMessage(), e);
                 LoginService.handlerError(e, getActivity());
+            }catch (Exception e) {
+                Log.e(TAG, e.getLocalizedMessage(), e);
             }
 
             return null;
